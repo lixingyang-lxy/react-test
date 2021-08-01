@@ -19,6 +19,9 @@ class Mouse extends Component {
   componentDidMount() {
     window.addEventListener('mousemove', this.handleMouseMove)
   }
+  componentWillUnmount() {
+    window.removeEventListener('mouseover', this.handleMouseMove)
+  }
 }
 
 Mouse.propTypes = {
