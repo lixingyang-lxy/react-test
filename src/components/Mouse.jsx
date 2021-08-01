@@ -25,7 +25,7 @@ class Mouse extends Component {
 }
 
 Mouse.propTypes = {
-  children: PropTypes.func.isRequired
+  children: <PropTypes className="func isRequired"></PropTypes>
 }
 
 export default Mouse
