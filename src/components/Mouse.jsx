@@ -8,7 +8,7 @@ class Mouse extends Component {
   }
 
   render() { 
-    return this.props.render(this.state)
+    return this.props.children(this.state)
   }
   handleMouseMove = e => {
     this.setState({
@@ -22,7 +22,7 @@ class Mouse extends Component {
 }
 
 Mouse.propTypes = {
-  render: PropTypes.func.isRequired
+  children: PropTypes.func.isRequired
 }
 
 export default Mouse
