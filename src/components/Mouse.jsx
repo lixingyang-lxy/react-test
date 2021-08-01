@@ -1,31 +1,39 @@
 import { Component } from "react";
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
-class Mouse extends Component {
-  state = {
-    x: 0,
-    y: 0
-  }
-
-  render() { 
-    return this.props.children(this.state)
-  }
-  handleMouseMove = e => {
-    this.setState({
-      x: e.clientX,
-      y: e.clientY
-    })
-  }
-  componentDidMount() {
-    window.addEventListener('mousemove', this.handleMouseMove)
-  }
-  componentWillUnmount() {
-    window.removeEventListener('mouseover', this.handleMouseMove)
-  }
+// 测试高阶组件
+const Position = props => {
+  return <p>
+    鼠标当前位置是： (x: {props.x}, y: {props.y})
+  </p>
 }
 
-Mouse.propTypes = {
-  children: <PropTypes className="func isRequired"></PropTypes>
+const MousePosition = withMouse(Position)
+
+function withMouse(WrapedComponent) {
+  class Mouse extends Component {
+    state = {
+      x: 0,
+      y: 0
+    }
+    handleMouseMove = e => {
+      this.setState(() => ({
+        x: e.clientX,
+        y: e.clientY
+      }))
+    }
+    componentDidMount() {
+      window.addEventListener('mousemove', this.handleMouseMove)
+    }
+    componentWillUnmount() {
+      window.removeEventListener('mousemove', this.handleMouseMove)
+    }
+    render() {
+      return <WrapedComponent {...this.state}/>
+    }
+  }
+  return Mouse
 }
 
-export default Mouse
+
+export default MousePosition
