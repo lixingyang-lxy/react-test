@@ -1,5 +1,6 @@
 import { Component } from "react";
 // import PropTypes from 'prop-types';
+import img from '../img/cat.png';
 
 // 测试高阶组件
 const Position = props => {
@@ -8,7 +9,18 @@ const Position = props => {
   </p>
 }
 
+const MouseCat = props => {
+  return <img alt='花猫' src={img} style={{
+    width: '20px',
+    height: '20px',
+    position: 'absolute',
+    top: props.y,
+    left: props.x
+  }}></img>
+}
+
 const MousePosition = withMouse(Position)
+const CatPosition = withMouse(MouseCat)
 
 function withMouse(WrapedComponent) {
   class Mouse extends Component {
@@ -36,4 +48,7 @@ function withMouse(WrapedComponent) {
 }
 
 
-export default MousePosition
+export {
+  MousePosition,
+  CatPosition
+} 
