@@ -9,7 +9,7 @@ const Position = props => {
   </p>
 }
 
-const MouseCat = props => {
+const Cat = props => {
   return <img alt='花猫' src={img} style={{
     width: '20px',
     height: '20px',
@@ -19,8 +19,7 @@ const MouseCat = props => {
   }}></img>
 }
 
-const MousePosition = withMouse(Position)
-const CatPosition = withMouse(MouseCat)
+
 
 function withMouse(WrapedComponent) {
   class Mouse extends Component {
@@ -44,9 +43,16 @@ function withMouse(WrapedComponent) {
       return <WrapedComponent {...this.state}/>
     }
   }
+  Mouse.displayName = `WithMouse${getDisplayName(WrapedComponent)}`
   return Mouse
 }
 
+const MousePosition = withMouse(Position)
+const CatPosition = withMouse(Cat)
+
+function getDisplayName(WrapedComponent) {
+  return WrapedComponent.displayName || WrapedComponent.name || 'Component'
+}
 
 export {
   MousePosition,
