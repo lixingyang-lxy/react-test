@@ -7,8 +7,8 @@ function App() {
   return (
     <div>
       <header className="App-header">
-        <MousePosition /> 
-        <CatPosition />
+        <MousePosition a="1"/> 
+        <CatPosition b="1"/>
       </header>
     </div>
   );
