@@ -1,4 +1,5 @@
 import { Component } from "react";
+import MathNumber from './MathNumber'
 
 class Random extends Component {
   state={
@@ -19,7 +20,7 @@ class Random extends Component {
     console.log('render')
     return (
       <div>
-        <h1>随机数： {}</h1>
+        <MathNumber {...this.state} />
         <button onClick={this.handleclick}>重新生成</button>
       </div>
     )
