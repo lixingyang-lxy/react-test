@@ -4,14 +4,12 @@ import img from '../img/cat.png';
 
 // 测试高阶组件
 const Position = props => {
-  console.log(props.a)
   return <p>
     鼠标当前位置是： (x: {props.x}, y: {props.y})
   </p>
 }
 
 const Cat = props => {
-  console.log(props.b)
   return <img alt='花猫' src={img} style={{
     width: '20px',
     height: '20px',
