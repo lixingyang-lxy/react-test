@@ -1,15 +1,29 @@
+import React, { lazy, Suspense } from 'react';
 import '../src/css/App.css';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 
-const First = () => <p>页面的内容</p>
-const Home = () => <p>首页的内容</p>
+const Home = lazy(() => import('../src/pages/Home'))
+const CityList = lazy(() => import('../src/pages/CityList'))
+const Index = lazy(() => import('../src/pages/Index'))
+const News = lazy(() => import('../src/pages/News'))
+const Profile = lazy(() => import('../src/pages/Profile'))
+const HouseList = lazy(() => import('../src/pages/HouseList'))
+
 function App() {
   return (
-    <div>
-      <header className="App-header">
-      <First />
-      <Home />
-      </header>
-    </div>
+    <Router>
+      <Suspense fallback={<div className='index-Loading' >Loading...</div>}>
+        <div className="App-header">
+          <Route exact path='/' render={() => <Redirect to='/home' />}></Route>
+          <Route path='/home' component={Home}></Route>
+          <Route path='/citylist' component={CityList}></Route>
+          <Route exact path="/home/index" component={Index}></Route>
+          <Route exact path="/home/news" component={News}></Route>
+          <Route exact path="/home/profile" component={Profile}></Route>
+          <Route exact path="/home/list" component={HouseList}></Route>
+        </div>
+      </Suspense>
+    </Router >
   );
 }
 
