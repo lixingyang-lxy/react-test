@@ -16,6 +16,7 @@ function App() {
         <div className="App-header">
           <Route exact path='/' render={() => <Redirect to='/home' />}></Route>
           <Route path='/home' component={Home}></Route>
+          <Route path='/home/index' component={Home}></Route>
           <Route path='/citylist' component={CityList}></Route>
           <Route exact path="/home/index" component={Index}></Route>
           <Route exact path="/home/news" component={News}></Route>

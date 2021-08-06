@@ -3,9 +3,29 @@ import React from 'react';
 import { TabBar } from 'antd-mobile';
 import 'antd-mobile/dist/antd-mobile.css';
 import './index.css'
-
-// import { Route } from 'react-router-dom'
-
+// TabBar 数据
+const tabItems = [
+  {
+    title: '首页',
+    icon: 'icon-ind',
+    path: '/home/index'
+  },
+  {
+    title: '找房',
+    icon: 'icon-findHouse',
+    path: '/home/list'
+  },
+  {
+    title: '资讯',
+    icon: 'icon-infom',
+    path: '/home/news'
+  },
+  {
+    title: '我的',
+    icon: 'icon-my',
+    path: '/home/profile'
+  }
+]
 export default class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -13,7 +33,23 @@ export default class Home extends React.Component {
       selectedTab: this.props.location.pathname
     };
   }
-
+  renderTabBarItems() {
+    return tabItems.map(item => {
+      return <TabBar.Item
+        title={item.title}
+        key={item.title}
+        icon={<i className={`iconfont ${item.icon}`}></i>}
+        selectedIcon={<i className={`iconfont ${item.icon}`}></i>}
+        selected={this.state.selectedTab === item.path}
+        onPress={() => {
+          this.setState({
+            selectedTab: item.path
+          });
+          this.props.history.push(item.path)
+        }}
+      ></TabBar.Item>
+    })
+  }
   render() {
     return (
       <div className="home">
@@ -23,80 +59,7 @@ export default class Home extends React.Component {
           barTintColor="white"
           noRenderContent="true"
         >
-          <TabBar.Item
-            title="首页"
-            key="Life"
-            icon={
-              <i className="iconfont icon-ind"></i>
-            }
-            selectedIcon={
-              <i className="iconfont icon-ind"></i>
-            }
-            selected={this.state.selectedTab === '/home/index'}
-            onPress={() => {
-              this.setState({
-                selectedTab: '/home/index',
-              });
-              this.props.history.push('/home/index')
-            }}
-            data-seed="logId"
-          >
-          </TabBar.Item>
-          <TabBar.Item
-            icon={
-              <i className="iconfont icon-ind"></i>
-            }
-            selectedIcon={
-              <i className="iconfont icon-ind"></i>
-            }
-            title="找房"
-            key="Koubei"
-            selected={this.state.selectedTab === '/home/list'}
-            onPress={() => {
-              this.setState({
-                selectedTab: '/home/list',
-              });
-              this.props.history.push('/home/list')
-            }}
-            data-seed="logId1"
-          >
-          </TabBar.Item>
-          <TabBar.Item
-            icon={
-              <i className="iconfont icon-ind"></i>
-            }
-            selectedIcon={
-              <i className="iconfont icon-ind"></i>
-            }
-            title="资讯"
-            key="Friend"
-            selected={this.state.selectedTab === '/home/news'}
-            onPress={() => {
-              this.setState({
-                selectedTab: '/home/news',
-              });
-              this.props.history.push('/home/news')
-            }}
-          >
-          </TabBar.Item>
-          <TabBar.Item
-            icon={
-              <i className="iconfont icon-ind"></i>
-            }
-            selectedIcon={
-              <i className="iconfont icon-ind"></i>
-            }
-            title="我的"
-            key="my"
-            selected={this.state.selectedTab === '/home/profile'}
-            onPress={() => {
-              this.setState({
-                selectedTab: '/home/profile',
-              });
-              this.props.history.push('/home/profile')
-            }}
-          >
-          </TabBar.Item>
+          {this.renderTabBarItems()}
         </TabBar>
       </div>
     );
